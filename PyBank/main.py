@@ -43,11 +43,16 @@ with open('budget_data.csv', newline='') as csvfile:
         # Use a weighted average to calculate average of monthly profit change
         run_avg=( (run_avg * (months-1) ) + month_delta) / months
         months+=1
-        print(row)
-print(months)
-print(total)
-print(run_avg)
-print(when_most)
-print(most_profit)
-print(when_least)
-print(least_profit)
+
+# Print data into text file
+file=open('BankResults.txt',"w")
+file.write("Financial Analysis")
+file.write('\n'+"----------------------------")
+file.write('\n'+f"Total Months: {months}")
+file.write('\n'+f"Total: {total}")
+file.write('\n'+f"Average Change: ${round(run_avg,2)}")
+file.write('\n'+f"Greatest Increase in Profits: {when_most} (${most_profit})")
+file.write('\n'+f"Greatest Decrease in Profits: {when_least} (${least_profit})")
+# Print Text File into Terminal
+file=open('BankResults.txt',"r")
+print(file.read())

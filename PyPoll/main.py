@@ -19,6 +19,7 @@ with open('election_data.csv', newline='') as csvfile:
             candict[cand][0] += 1
         else:
             candict[cand] = [1,float(1)]
+
 for keys in candict:
     candict[keys][1] = candict[keys][0] / votes
 
