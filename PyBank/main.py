@@ -10,7 +10,7 @@ with open('budget_data.csv', newline='') as csvfile:
     total = 0
     run_avg = 0
 
-    # Read the header row first (skip this step if there is now header)
+    # Read the header row first
     csv_header = next(csvreader)
 
     # initialize data with first month
