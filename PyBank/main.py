@@ -27,11 +27,13 @@ with open('budget_data.csv', newline='') as csvfile:
     # Begin Calculations with the remaining data
     total = 0
     run_avg = 0
+    total_delta = 0
     for row in csvreader:
         this_month = int(row[1])
         # Caluclate monthly change in profits
         total = total + this_month
         month_delta = this_month - last_month
+        total_delta += month_delta
         last_month = this_month
         # check for superlatives
         if (month_delta > most_profit):
@@ -40,17 +42,16 @@ with open('budget_data.csv', newline='') as csvfile:
         elif (month_delta < least_profit):
             least_profit = month_delta
             when_least = row[0]
-        # Use a weighted average to calculate average of monthly profit change
-        run_avg=( (run_avg * (months-1) ) + month_delta) / months
         months+=1
 
+delta_avg = total_delta/(months-1)
 # Print data into text file
 file=open('BankResults.txt',"w")
 file.write("Financial Analysis")
 file.write('\n'+"----------------------------")
 file.write('\n'+f"Total Months: {months}")
 file.write('\n'+f"Total: {total}")
-file.write('\n'+f"Average Change: ${round(run_avg,2)}")
+file.write('\n'+f"Average Change: ${delta_avg:.2f}")
 file.write('\n'+f"Greatest Increase in Profits: {when_most} (${most_profit})")
 file.write('\n'+f"Greatest Decrease in Profits: {when_least} (${least_profit})")
 # Print Text File into Terminal
